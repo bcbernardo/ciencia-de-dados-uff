@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1560181161166.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "584561532",
+    "id" : "A06B14FC",
+    "lastKnownWriteTime" : 1560179523,
+    "last_content_update" : 1560179523,
+    "path" : "~/Bernardo/Academico/CienciaDeDados/Tarefa04/T04_Script.R",
+    "project_path" : null,
+    "properties" : {
+        "cursorPosition" : "6,1",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

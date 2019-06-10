@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1560180120949.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2899177090",
+    "id" : "6ADB456E",
+    "lastKnownWriteTime" : 1560180289,
+    "last_content_update" : -2147483648,
+    "path" : "~/Bernardo/Academico/CienciaDeDados/Tarefa05/T05_Script.R",
+    "project_path" : "T05_Script.R",
+    "properties" : {
+        "cursorPosition" : "26,0",
+        "scrollLine" : "19"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

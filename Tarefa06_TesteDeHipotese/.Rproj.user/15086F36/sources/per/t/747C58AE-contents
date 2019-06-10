@@ -1,0 +1,116 @@
+####### Resumo 
+## Exercício 1
+n = 60000
+phat = 0.121
+prop.test(n*phat, n, p=0.113, alternative = "greater")
+
+## Exercício 2
+x = c(18,3)
+n = c(22,22)
+prop.test(x,n,alt="two.side")
+
+## Exercício 3
+install.packages("UsingR")
+library("UsingR")
+data("normtemp")
+t.test(normtemp$temperature,mu = 98.6, alternative = "two.sided")
+#Instigar novas questões
+boxplot(normtemp$temperature ~ normtemp$gender, main= "Boxplot Comparativo por Genero")
+
+#######
+
+################### Roteiro 9 ############################
+### Teste de média entre duas populações 
+# Médias 
+sapply(notas, mean)
+
+# Histogramas 
+par(mfrow = c(1,2))
+hist(notas$sat.m.A, main="Escola A", xlab="notas")
+hist(notas$sat.m.B, main = "Escola B", xlab="notas")
+par(mfrow=c(1,1))
+
+# Teste de Normalidade 
+require("epiDisplay")
+shapiro.qqnorm(notas$sat.m.A)
+shapiro.qqnorm(notas$sat.m.B)
+
+# Variâncias 
+var(notas$sat.m.A)
+var(notas$sat.m.B)
+
+# Teste de comparação de médias populações normais
+t.test(notas$sat.m.A, notas$sat.m.B, alternative = "less", var.equal = T)
+
+## Exercício 4 
+# Importe os dados do arquivo notas_comp3
+library(readr)
+notas_comp3 <- read_delim("notas_comp3.csv", 
+                          ";", escape_double = FALSE, trim_ws = TRUE)
+# Acima de 500 pontos
+require(dplyr)
+notas_comp3 <- mutate(notas_comp3, pro.A = as.logical(sat.m.A >= 500), 
+                                   pro.C = as.logical(sat.m.C >= 500))
+attach(notas_comp3)
+#2
+sd(sat.m.A)
+sd(sat.m.C)
+t.test(sat.m.A, sat.m.C, alt = "less", var.equal = T)
+#3
+table(pro.A)
+table(pro.C)
+prop.test(x = c(75,82), n = c(160,160), alternative = "less")
+detach(notas_comp3)
+
+### Teste de sinais para mediana 
+min_lig = c(2,1,3,3,3,3,1,3,16,2,2,12,20,3,1)
+hist(min_lig, breaks = 10)
+# a densidade estimada pode ser plotada da seguinte maneira 
+plot(density(min_lig))
+# teste de sinais 
+require("DescTools")
+SignTest(min_lig, mu = 5, alt = "less")
+
+### Teste de Wilcoxon para mediana 
+require(UsingR)
+data("salmon.rate")
+hist(salmon.rate)
+log.salmon <- log(salmon.rate)
+hist(log.salmon, probability = T)
+lines(density(log.salmon))
+wilcox.test(log.salmon, mu = log(0.005), alternative = "greater")
+SignTest(log.salmon, mu = log(0.005), alternative = "greater")
+
+## Exercício 5
+require(UsingR)
+data("babies")
+attach(babies)
+fumantes <- gestation[smoke == 1 & gestation != 999]
+hist(fumantes)
+plot(density(fumantes))
+# teste de Normalidade
+shapiro.qqnorm(fumantes)
+wilcox.test(fumantes, mu = 280, alt = "two.side")
+require(DescTools)
+SignTest(fumantes, mu = 280, alt = "two.side")
+detach(babies)
+
+### Teste de comparação de médias para amostras pareadas 
+library(readr)
+Finasteride <- read_csv("Finasteride.csv")
+shapiro.test(Finasteride$Finasteride - Finasteride$placebo)
+plot(density(Finasteride$Finasteride - Finasteride$placebo))
+t.test(Finasteride$Finasteride, Finasteride$placebo, paired = T, alt = "g")
+
+## Exercício 6
+# Importar os dados do arquivo teste.csv, nomear por teste 
+teste <- read_csv("teste.csv")
+shapiro.qqnorm(teste$pos - teste$pre)
+t.test(teste$pre,teste$pos, paired = T, alt = "less")
+
+### Teste de Wilcoxon para igualdade de centralidade 
+A = c(5.8, 1, 1.1, 2.1, 2.5, 1.1, 1, 1.2, 3.2, 2.7)
+B = c(1.5, 2.7, 6.6, 4.6, 1.1, 1.2, 5.7, 3.2, 1.2, 1.3)
+plot(density(A))
+lines(density(B))
+wilcox.test(A,B)
